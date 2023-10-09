@@ -112,10 +112,10 @@ namespace FundooNote.Controllers
             try
             {
                 long userId = long.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value);
-                bool result = business.DeleteNote(noteID, userId);
-                if (result)
+                var result = business.DeleteNote(noteID, userId);
+                if (result!=null)
                 {
-                    return Ok(new { message = "Successfull" });
+                    return Ok(new { message = "Successfull"});
                 }
                 else
                 {
@@ -133,10 +133,10 @@ namespace FundooNote.Controllers
         public IActionResult ArchieveNote(long noteID)
         {
             long userId = long.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value);
-            bool result = business.IsArchiev(noteID);
-            if (result)
+            var result = business.IsArchiev(noteID);
+            if (result !=null)
             {
-                return Ok(new { message = "Successfull" });
+                return Ok(new { message = "Successfull" ,data = result });
             }
             else
             {
@@ -150,8 +150,8 @@ namespace FundooNote.Controllers
         public IActionResult PinNote(long noteID)
         {
             long userId = long.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value);
-            bool result = business.IsPin(noteID);
-            if (result)
+            var result = business.IsPin(noteID);
+            if (result !=null)
             {
                 return Ok(new { message = "Successfull" });
             }
@@ -167,10 +167,10 @@ namespace FundooNote.Controllers
         public IActionResult NoteTrash(long noteID)
         {
             long userId = long.Parse(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value);
-            bool result = business.IsTrash(noteID);
-            if (result)
+            var result = business.IsTrash(noteID);
+            if (result!=null)
             {
-                return Ok(new { message = "Successfull" });
+                return Ok(new { message = "Successfull" , data = result });
             }
             else
             {

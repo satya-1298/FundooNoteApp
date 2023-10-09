@@ -31,7 +31,7 @@ namespace FundooNote.Controllers
         }
         [Authorize]
         [HttpPost]
-        [Route("NoteAdd/{nodeId}/{labelId}")]
+        [Route("LabelAdd/{nodeId}/{labelId}")]
         public IActionResult Add(long nodeId,long labelId)
         {
             try

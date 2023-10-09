@@ -40,7 +40,7 @@ namespace FundooNote
         {
           
 
-            // IMPLEMENT CLOUDINARY:-
+            // IMPLEMENTATION OF CLOUDINARY:-
 
             IConfigurationSection configurationSection = Configuration.GetSection("CloudinaryConnection");
             Account cloudinaryAccount = new Account(
@@ -108,7 +108,6 @@ namespace FundooNote
                  opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
              })
              .AddJwtBearer(options =>
-
              {
                  options.SaveToken = true;
                  options.TokenValidationParameters = new TokenValidationParameters
@@ -120,12 +119,14 @@ namespace FundooNote
                      IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(token))
                  };
              });
+
             // REDIS CONFIGURATION:- 
             services.AddMemoryCache();     
             services.AddStackExchangeRedisCache(options =>     
             {            
                 options.Configuration = "localhost:6379";   
             });
+
             // RABBITMQ CONFIGURATION:- 
             services.AddMassTransit(x =>
             {
@@ -140,6 +141,26 @@ namespace FundooNote
                 }));
             });
             services.AddMassTransitHostedService();
+
+            // Configuring FrontEnd
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy(name: "AllowOrigin",
+            //      builder =>
+            //      {
+            //          builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            //      });
+            //});
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "AllowLocalhost",
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:3000")
+                            .AllowAnyMethod()
+                            .AllowAnyHeader();
+                    });
+            });
 
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -160,6 +181,8 @@ namespace FundooNote
 
 
             app.UseRouting();
+            app.UseCors("AllowLocalhost");
+
             app.UseAuthentication();
             app.UseAuthorization();
 
