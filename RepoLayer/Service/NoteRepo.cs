@@ -78,14 +78,24 @@ namespace RepoLayer.Service
 
         public List<NotesEntity> GetAllNotes(long UserId)
         {
-            var result = _fundooContext.Notes.Where(x => x.UserId == UserId).ToList();
-            if (result.Count != 0)
+            try
             {
-                return result;
+                var result = _fundooContext.Notes.Where(x => x.UserId == UserId).ToList();
+                if (result != null)
+                {
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
             }
-            return null;
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
-        public bool DeleteNote(long noteID, long userId)
+        public NotesEntity DeleteNote(long noteID, long userId)
         {
             try
             {
@@ -95,9 +105,9 @@ namespace RepoLayer.Service
                 {
                     _fundooContext.Notes.Remove(noteDelete);
                     _fundooContext.SaveChanges();
-                    return true;
+                    return noteDelete;
                 }
-                return false;
+                return noteDelete;
 
             }
             catch (Exception ex)
@@ -105,46 +115,64 @@ namespace RepoLayer.Service
                 throw ex;
             }
         }
-        public bool IsArchiev(long noteID)
+        public NotesEntity IsArchiev(long noteID)
         {
-            var result = _fundooContext.Notes.Where(x => x.NoteID == noteID).FirstOrDefault();
-            if (result != null)
+            NotesEntity result = _fundooContext.Notes.Where(x => x.NoteID == noteID).FirstOrDefault();
+            if (result != null && result.IsArchive==true)
             {
                 result.IsArchive = !result.IsArchive;
                 _fundooContext.SaveChanges();
-                return true;
+                return result;
+            }
+            else if(result != null && result.IsArchive == false)
+            {
+                result.IsArchive = !result.IsArchive;
+                _fundooContext.SaveChanges();
+                return result;
             }
             else
             {
-                return false;
+                return result;
             }
         }
-        public bool IsPin(long noteID)
+        public NotesEntity IsPin(long noteID)
         {
             var result = _fundooContext.Notes.Where(x => x.NoteID == noteID).FirstOrDefault();
-            if (result != null)
+            if (result != null && result.IsPin==true)
             {
                 result.IsPin = !result.IsPin;
                 _fundooContext.SaveChanges();
-                return true;
+                return result;
+            }
+            else if (result != null && result.IsPin == false)
+            {
+                result.IsPin = !result.IsPin;
+                _fundooContext.SaveChanges();
+                return result;
             }
             else
             {
-                return false;
+                return result;
             }
         }
-        public bool IsTrash(long noteID)
+        public NotesEntity IsTrash(long noteID)
         {
             var result=_fundooContext.Notes.Where(x=>x.NoteID==noteID).FirstOrDefault();
-            if (result != null)
+            if (result != null && result.IsTrash==true)
             {
                 result.IsTrash= !result.IsTrash;
                 _fundooContext.SaveChanges();
-                return true;
+                return result;
+            }
+            else if(result!= null && result.IsTrash == false)
+            {
+                result.IsTrash = !result.IsTrash;
+                _fundooContext.SaveChanges();
+                return result;
             }
             else
             {
-                return false;
+                return result;
             }
         }
         public string UploadImage(string image, long userId, long noteID)

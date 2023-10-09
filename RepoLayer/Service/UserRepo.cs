@@ -70,7 +70,7 @@ namespace RepoLayer.Service
                     new Claim("UserId", UserId.ToString()),
                     new Claim(ClaimTypes.Email, Email)
                 }),
-                Expires = DateTime.UtcNow.AddMinutes(30),
+                Expires = DateTime.UtcNow.AddMinutes(130),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(secret), SecurityAlgorithms.HmacSha256Signature)
             };
             var token=tokenHandler.CreateToken(TokenDescriptor);
@@ -177,7 +177,7 @@ namespace RepoLayer.Service
             catch (Exception ex)
             {
 
-                throw (ex);
+                throw;
             }
         }
         public bool ResetPassword(string email, ResetPassword resetPassword)
