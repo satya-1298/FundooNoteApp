@@ -55,7 +55,7 @@ namespace BusinessLayer.Service
             }
         }
       
-        public bool DeleteNote(long noteID, long userId)
+        public NotesEntity DeleteNote(long noteID, long userId)
         {
             try
             {
@@ -67,7 +67,7 @@ namespace BusinessLayer.Service
                 throw ex;
             }
         }
-        public bool IsArchiev(long noteID)
+        public NotesEntity IsArchiev(long noteID)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace BusinessLayer.Service
                 throw ex;
             }
         }
-        public bool IsPin(long noteID)
+        public NotesEntity IsPin(long noteID)
         {
             try
             {
@@ -89,7 +89,7 @@ namespace BusinessLayer.Service
                 throw ex;
             }
         }
-        public bool IsTrash(long noteID)
+        public NotesEntity IsTrash(long noteID)
         {
             try
             {
