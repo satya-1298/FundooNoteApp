@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FundoNote\FundooNoteB.csproj" />
+    <ProjectReference Include="..\FundoNote\FundoNote.csproj" />
   </ItemGroup>
 
 
