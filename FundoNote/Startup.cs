@@ -24,7 +24,7 @@ using System.Security.Principal;
 using CloudinaryDotNet;
 using MassTransit;
 
-namespace FundooNote
+namespace FundoNote
 {
     public class Startup
     {

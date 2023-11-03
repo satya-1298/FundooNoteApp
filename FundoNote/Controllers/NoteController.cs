@@ -16,7 +16,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FundooNote.Controllers
+namespace FundoNote.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

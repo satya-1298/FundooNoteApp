@@ -10,7 +10,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace FundooNote.Controllers
+namespace FundoNote.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

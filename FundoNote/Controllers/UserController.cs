@@ -16,7 +16,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
-namespace FundooNote.Controllers
+namespace FundoNote.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

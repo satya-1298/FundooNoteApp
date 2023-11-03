@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
-namespace FundooNote.Controllers
+namespace FundoNote.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
